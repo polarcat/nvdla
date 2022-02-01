@@ -237,7 +237,7 @@ int32_t dla_data_write(void *driver_context, void *task_data,
 		return -EFAULT;
 	}
 
-	ret = dma_buf_begin_cpu_access(buf, DMA_BIDIRECTIONAL);
+	ret = dma_buf_begin_cpu_access(buf, 0, size, DMA_BIDIRECTIONAL);
 	if (ret)
 		goto put_dma_buf;
 
@@ -255,7 +255,7 @@ int32_t dla_data_write(void *driver_context, void *task_data,
 	dma_buf_vunmap(buf, ptr);
 
 end_cpu_access:
-	dma_buf_end_cpu_access(buf, DMA_BIDIRECTIONAL);
+	dma_buf_end_cpu_access(buf, 0, size, DMA_BIDIRECTIONAL);
 
 put_dma_buf:
 	dma_buf_put(buf);
@@ -282,7 +282,7 @@ int32_t dla_data_read(void *driver_context, void *task_data,
 		return -EFAULT;
 	}
 
-	ret = dma_buf_begin_cpu_access(buf, DMA_BIDIRECTIONAL);
+	ret = dma_buf_begin_cpu_access(buf, 0, size, DMA_BIDIRECTIONAL);
 	if (ret)
 		goto put_dma_buf;
 
@@ -299,7 +299,7 @@ int32_t dla_data_read(void *driver_context, void *task_data,
 	dma_buf_vunmap(buf, ptr);
 
 end_cpu_access:
-	dma_buf_end_cpu_access(buf, DMA_BIDIRECTIONAL);
+	dma_buf_end_cpu_access(buf, 0, size, DMA_BIDIRECTIONAL);
 
 put_dma_buf:
 	dma_buf_put(buf);

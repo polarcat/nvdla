@@ -329,7 +329,7 @@ int32_t nvdla_gem_dma_addr(struct drm_device *dev, struct drm_file *file,
 
 	*addr = nobj->dma_addr;
 
-	drm_gem_object_put_unlocked(dobj);
+	drm_gem_object_unreference_unlocked(dobj);
 
 	return 0;
 }
